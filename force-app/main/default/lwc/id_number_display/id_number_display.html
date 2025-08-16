@@ -1,0 +1,19 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="4">
+        </lightning-layout-item>
+        <lightning-layout-item size="4">
+            <lightning-card title="Enter SA ID Number" icon-name="utility:number_input">
+                <!-- We couldn't just use a numeric input because it doesn't keep leading zeros -->
+                <lightning-input type="text" label="IDNumber" onchange={handleIDChange} value={IDNum} 
+                    max-length="13" variant="label-inline">
+                </lightning-input>
+
+                Length: {IDComponents.length}<br />
+                Date: {IDComponents.date}
+            </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item size="4">
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,4 @@
+
+
+date1 = new Date([year, month, day].join("/"))
+isNaN(date1) ? false : month == date1.getMonth()+1
