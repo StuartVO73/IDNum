@@ -1,19 +1,33 @@
 <template>
     <lightning-layout>
-        <lightning-layout-item size="4">
+        <lightning-layout-item size="3">
         </lightning-layout-item>
-        <lightning-layout-item size="4">
+        <lightning-layout-item size="3">
             <lightning-card title="Enter SA ID Number" icon-name="utility:number_input">
                 <!-- We couldn't just use a numeric input because it doesn't keep leading zeros -->
-                <lightning-input type="text" label="IDNumber" onchange={handleIDChange} value={IDNum} 
-                    max-length="13" variant="label-inline">
+                <lightning-input type="text" label="ID Number" onchange={handleIDChange} value={IDNum} max-length="13"
+                    variant="label-inline">
                 </lightning-input>
-
-                Length: {IDComponents.length}<br />
-                Date: {IDComponents.date}
+                <template lwc:if={validID}>
+                    <lightning-button variant="brand" label="Brand" title="Submit ID Number" onclick={handleClick}
+                        class="slds-m-left_x-small"></lightning-button>
+                </template>
+                <template lwc:else>
+                    <lightning-button variant="Neutral" label="Brand" title="Submit ID Number" onclick={handleClick}
+                        class="slds-m-left_x-small"></lightning-button>
+                </template>
             </lightning-card>
         </lightning-layout-item>
-        <lightning-layout-item size="4">
+        <lightning-layout-item size="3">
+            <lightning-card title="Number Components" icon-name="utility:list">
+                Length: {IDComponents.length}<br />
+                Date: {IDComponents.date}<br />
+                Gender: {IDComponents.gender}<br />
+                Citizenship: {IDComponents.citizenship}<br />
+                Checksum: {IDComponents.checksumCorrect}<br />
+            </lightning-card>
         </lightning-layout-item>
+            <lightning-layout-item size="3">
+            </lightning-layout-item>
     </lightning-layout>
 </template>
