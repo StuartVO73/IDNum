@@ -37,10 +37,10 @@ public class Holiday {
     HttpRequest request = new HttpRequest();
     String url = 'callout:Calendarific/api/v2/holidays';
     String apiKey = '24c5e86734eb44dc4a962826324a5546e74dc42f';
-    String country = '&country=ZA';
-    String year = '&year=2025';
-    String month = '&month=1';
-    String day = '&day=1';
+    String country = 'ZA';
+    String year = '2025';
+    String month = '1';
+    String day = '1';
     String paramsTemplate = '{0}?api_key={1}&country={2}&year={3}&month={4}&day={5}';
     String[] paramsList = new List<String> {url, apiKey, country, year, month, day};
         String endpoint = String.format (paramsTemplate, paramsList);
