@@ -25,6 +25,14 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomMetadata</name>
+	</types>
+	<types>
+		<members>APIKey__mdt</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
 		<members>Calendarific</members>
 		<name>ExternalCredential</name>
 	</types>

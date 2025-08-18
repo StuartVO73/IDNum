@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import getHolidays from "@salesforce/apex/CalendarificCallout.GetHolidays"
 
 const nonDigitRe = /[^0-9]/;
 
@@ -164,7 +165,13 @@ export default class IDNumberDisplay extends LightningElement {
         event.target.reportValidity();
     }
 
-    handleClick(event) {
-
+        async handleLoad() {
+        try {
+            this.holidays = await getHolidays();
+            this.error = undefined;
+        } catch (error) {
+            this.holidays = undefined;
+            this.error = error;
+        }
     }
 }
