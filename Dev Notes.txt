@@ -1,54 +1,27 @@
-public class HolidayResponse {
-    
-    public HolidayResponse (String response) {
-        Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response);
-        //system.debug (results.get('meta'));
-        Holiday[] holidayList = new List<Holiday>();
-        Object[] holidaysContainer = (Object[])((Map<String, Object>)results.get('response')).get('holidays');
-        system.debug(holidaysContainer);
-        for (Object H : holidaysContainer) {
-            holidayList.add (new Holiday (H));
-        }
-        for (Holiday H : holidayList) {
-            system.debug (H);
-        }
-    }   
-}
+const objToString = (E) => {
+    return E
+        ? Object.keys(E)
+              .map((key) => {
+                  return key + ": " + E[key];
+              })
+              .join(", ")
+        : "--";
+};
 
-public class Holiday {
-    String name;
-    String isoDate;
-    String description;
-    
-    public Holiday (Object H) {
-        Map<String, Object> H2 = (Map<String, Object>) H;
-        this.name = (String) H2.get('name');
-	    this.description = (String) H2.get('description');
-    	this.isoDate = (String) ((Map <String, Object>) H2.get('date')).get('iso');
-    }
-    
-    public override String toString () {
-        return name + ', ' + description + ', ' + isoDate;
-    }
-}
+7301010000086
 
-    
-    Http http = new Http();
-    HttpRequest request = new HttpRequest();
-    String url = 'callout:Calendarific/api/v2/holidays';
-    String apiKey = '24c5e86734eb44dc4a962826324a5546e74dc42f';
-    String country = 'ZA';
-    String year = '2025';
-    String month = '1';
-    String day = '1';
-    String paramsTemplate = '{0}?api_key={1}&country={2}&year={3}&month={4}&day={5}';
-    String[] paramsList = new List<String> {url, apiKey, country, year, month, day};
-        String endpoint = String.format (paramsTemplate, paramsList);
-    //request.setEndpoint('callout:Calendarific/api/v2/holidays?api_key=' + apiKey + country + year + month + day );
-    request.setEndpoint(endpoint);
-    request.setMethod('GET');
-    HttpResponse response = http.send(request);
-    //system.debug (response.getBody());
-    if(response.getStatusCode() == 200) {
-        HolidayResponse Holidays = new HolidayResponse (response.getBody());
-    }
+            //this.data = [];
+            //console.log("Payload = " + objToString(payload));
+            this.data = await getHolidays(payload);
+            /*const data = await getHolidays(payload);
+            for (let i of data) {
+                let j = { ...i };
+                //j.isoDate = j.isoDate.substring(0, 10);
+                this.data.push(j);
+            }
+            let n = 0;
+            for (let i of this.data) {
+                console.log("Column data[" + (n++) + "]: " + objToString(i));
+            }
+            */
+

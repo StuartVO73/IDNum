@@ -1,5 +1,8 @@
-import { LightningElement } from "lwc";
-import getHolidays from "@salesforce/apex/CalendarificCallout.GetHolidays"
+import { wire, LightningElement } from "lwc";
+import { subscribe, publish, MessageContext } from 'lightning/messageService';
+import IDSELECTEDCHANNEL from "@salesforce/messageChannel/IDNumSelected__c"
+import COMPONENTONLINE from "@salesforce/messageChannel/ComponentOnline__c";
+//import objToString from "c/utils";
 
 const nonDigitRe = /[^0-9]/;
 
@@ -15,6 +18,8 @@ export default class IDNumberDisplay extends LightningElement {
     */
 
     _IDNumStr = "";
+
+    componentName;
 
     IDComponents = {
         date: "",
@@ -158,20 +163,102 @@ export default class IDNumberDisplay extends LightningElement {
         return sum % 10 === 0;
     }
 
+
+    // Messaging
+    // =========
+
+    @wire(MessageContext)
+    messageContext;
+
+    // This channel is used by newly-enabled components 
+    // to signal that they online
+    subscribeToMessageChannelComponentOnline() {
+        this.subscription = subscribe(
+            this.messageContext,
+            COMPONENTONLINE,
+            (message) => this.handleMessage(message)
+        );
+    }
+
+
+    // Once component is online, send the ID number to it
+    handleMessage(message) {
+        //console.log("Message = " + objToString(message));
+        this.componentName = message.ComponentName
+        this.sendMessage();
+    }
+
+    sendMessage() {
+        //console.log("Message = " + objToString(message));
+        let payload = {};
+        switch (this.componentName) {
+            case "showIdComponents":
+                publish(this.messageContext, IDSELECTEDCHANNEL, this.IDComponents);
+                break;
+            case "showHolidays":
+                payload.date = this.IDComponents.date;
+                payload.gender = this.IDComponents.gender;
+                payload.citizenship = this.IDComponents.citizenshipe;
+                payload.checksumCorrect = this.IDComponents.checksumCorrect;
+                payload.RequestType = this.holidayRequestType;
+                payload.headerText = this.headerText;
+                publish(this.messageContext, IDSELECTEDCHANNEL, payload);
+                break;
+            default:
+            //Ignore
+        }
+    }
+
+
+    // Event Handlers
+    // ==============
+
+    showComponents = false;
+    showHolidays = false;
+    holidayRequestType = "";
+    headerText = "";
+
     handleIDChange(event) {
         this.IDNum = event.target.value;
-
         event.target.setCustomValidity(this.errorMessage);
         event.target.reportValidity();
     }
 
-        async handleLoad() {
-        try {
-            this.holidays = await getHolidays();
-            this.error = undefined;
-        } catch (error) {
-            this.holidays = undefined;
-            this.error = error;
-        }
+    // Just show and hide components
+    // We cannot publish data to them until they're initialised, 
+    // so that's handled by the COMPONENTONLINE channel above
+    handleClickComponents() {
+        this.showComponents = true;
+        this.showHolidays = false;
+        if (this.componentName) this.sendMessage();
+    };
+
+    handleClickHolidaysInBirthYear() {
+        this.showComponents = false;
+        this.showHolidays = true;
+        this.holidayRequestType = "ShowHolidaysInYear";
+        this.headerText = "Holidays in year of your birth";
+        if (this.componentName) this.sendMessage();
     }
+
+    handleClickHolidaysOnBirthday() {
+        this.showComponents = false;
+        this.showHolidays = true;
+        this.holidayRequestType = "ShowHolidaysOnDay";
+        this.headerText = "Holidays on your birthday";
+        if (this.componentName) this.sendMessage();
+    }
+
+    // Initialisation Hook
+    // ===================
+
+    connectedCallback() {
+        this.subscribeToMessageChannelComponentOnline();
+    }
+
+    renderedCallback() {
+        this.template.querySelector("lightning-input")?.focus();
+    }
+
+
 }

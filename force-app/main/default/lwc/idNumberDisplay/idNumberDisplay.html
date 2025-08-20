@@ -1,0 +1,44 @@
+<template>
+    <lightning-layout horizontal-align="center" multiple-rows>
+        <lightning-layout-item size="4">
+        </lightning-layout-item>
+        <lightning-layout-item size="4">
+            <lightning-card title="Enter SA ID Number" icon-name="utility:number_input">
+                <!-- We couldn't just use a numeric input because it doesn't keep leading zeros -->
+                <lightning-input type="text" label="ID Number" onchange={handleIDChange} value="7301010000086"
+                    max-length="13" variant="label-inline">
+                </lightning-input>
+
+                <lightning-button-group>
+                    <template lwc:if={validID}>
+                        <lightning-button label="Show ID Components" title="Submit ID Number"
+                            onclick={handleClickComponents} class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button label="Show Holidays in Birth Year" title="Submit ID Number"
+                            onclick={handleClickHolidaysInBirthYear} class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button label="Show Holidays on Birthday" title="Submit ID Number"
+                            onclick={handleClickHolidaysOnBirthday} class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                    <template lwc:else>
+                        <lightning-button label="Show ID Components" title="Submit ID Number" disabled
+                            class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button label="Show Holidays in Birth Year" title="Submit ID Number" disabled
+                            class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button label="Show Holidays on Birthday" title="Submit ID Number" disabled
+                            class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                </lightning-button-group>
+
+            </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item size="4">
+        </lightning-layout-item>
+        <lightning-layout-item size="4">
+            <template lwc:if={showComponents}>
+                <c-show-id-components></c-show-id-components>
+            </template>
+            <template lwc:if={showHolidays}>
+                <c-show-holidays></c-show-holidays>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
