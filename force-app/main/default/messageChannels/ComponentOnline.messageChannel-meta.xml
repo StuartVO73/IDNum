@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LightningMessageChannel xmlns="https://soap.sforce.com/2006/04/metadata">
-    <masterLabel>ComponentOnline</masterLabel>
-    <isExposed>true</isExposed>
     <description>Message Channel to alert other components when a new component has come online</description>
+    <isExposed>true</isExposed>
     <lightningMessageFields>
-        <fieldName>ComponentName</fieldName>
         <description>The name of the component that just came online.</description>
+        <fieldName>ComponentName</fieldName>
     </lightningMessageFields>
+    <masterLabel>ComponentOnline</masterLabel>
 </LightningMessageChannel>

@@ -1,7 +1,7 @@
 public class CalendarificCallout {
     
-    @AuraEnabled(cacheable=true)
-    public static List<Holiday> GetHolidays (String country, Integer year, Integer month, Integer day) {
+    @AuraEnabled
+    public static List<Map<String,String>> GetHolidays (String country, Integer year, Integer month, Integer day) {
         
         String url = 'callout:Calendarific/api/v2/holidays';
         String apiKey = [SELECT Key__c from APIKey__mdt where DeveloperName = 'Calendarific']?.Key__c;
@@ -32,12 +32,12 @@ public class CalendarificCallout {
         }
         Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
         
-        Holiday[] holidayList = new List<Holiday>();
+        List<Map<String,String>> holidayList = new List<Map<String,String>>();
         
         Object[] holidaysContainer = (Object[])((Map<String, Object>)results?.get('response'))?.get('holidays');
         
         for (Object H : holidaysContainer) {
-            holidayList.add (new Holiday (H));
+            holidayList.add (new Holiday (H).toMap());
         }
         return holidayList;
     }

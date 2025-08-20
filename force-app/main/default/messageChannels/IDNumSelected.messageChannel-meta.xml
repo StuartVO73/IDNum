@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="https://soap.sforce.com/2006/04/metadata">
+    <description>Message Channel to pass an SA ID number</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>The SA ID Number being passed</description>
+        <fieldName>IDNumber</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>The type of request</description>
+        <fieldName>RequestType</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>The Gender field of the ID Number.</description>
+        <fieldName>Gender</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>The Citizen field of the ID Number.</description>
+        <fieldName>Citizen</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>The Date of Birth field of the ID Number.</description>
+        <fieldName>Date</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>True if the checksum digit matches the rest of the ID.</description>
+        <fieldName>CheckSumCorrect</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>The text to display at the head of the component</description>
+        <fieldName>headerText</fieldName>
+    </lightningMessageFields>
+    <masterLabel>IDNumSelected</masterLabel>
+</LightningMessageChannel>
