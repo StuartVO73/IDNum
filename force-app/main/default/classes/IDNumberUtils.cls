@@ -1,5 +1,6 @@
 public class IDNumberUtils {
 
+    @AuraEnabled
     public static void AddIDNumber (String IDNumber, String birthdate, String gender, Boolean citizen) {
         ID_Number_Reference_Count__c[] recs = [
             select ID_Number__c, Date_of_Birth__c, Gender__c, SA_Citizen__c, NumReferences__c

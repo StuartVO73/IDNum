@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LightningMessageChannel xmlns="https://soap.sforce.com/2006/04/metadata">
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Message Channel to alert other components when a new component has come online</description>
     <isExposed>true</isExposed>
     <lightningMessageFields>

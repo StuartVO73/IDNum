@@ -1,27 +1,10 @@
-const objToString = (E) => {
-    return E
-        ? Object.keys(E)
-              .map((key) => {
-                  return key + ": " + E[key];
-              })
-              .join(", ")
-        : "--";
-};
 
 7301010000086
 
-            //this.data = [];
-            //console.log("Payload = " + objToString(payload));
-            this.data = await getHolidays(payload);
-            /*const data = await getHolidays(payload);
-            for (let i of data) {
-                let j = { ...i };
-                //j.isoDate = j.isoDate.substring(0, 10);
-                this.data.push(j);
-            }
-            let n = 0;
-            for (let i of this.data) {
-                console.log("Column data[" + (n++) + "]: " + objToString(i));
-            }
-            */
 
+Request Id: 2SRgL0000008S0jWAE (​https://orgfarm-20b850323f-dev-ed.develop.my.salesforce.com/2SRgL0000008S0jWAE​)
+ OrgId: 00DAu00000Bu725
+ Username: test-ekxws78encv9@example.com
+ Alias: MyScratchOrg
+
+ 

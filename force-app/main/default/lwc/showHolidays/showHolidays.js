@@ -75,7 +75,7 @@ export default class ShowHolidays extends LightningElement {
             this.error = undefined;
         } catch (error) {
             this.error = error;
-            this.data = undefined;
+            this.contacts = undefined;
         }
     }
 

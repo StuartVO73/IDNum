@@ -25,11 +25,15 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
+		<members>SA_ID_Number</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
 		<members>ID_Number_Reference_Count__c.Date_of_Birth__c</members>
 		<members>ID_Number_Reference_Count__c.Gender__c</members>
-		<members>ID_Number_Reference_Count__c.SA_Citizen__c</members>
-		<members>ID_Number_Reference_Count__c.NumReferences__c</members>
 		<members>ID_Number_Reference_Count__c.ID_Number__c</members>
+		<members>ID_Number_Reference_Count__c.NumReferences__c</members>
+		<members>ID_Number_Reference_Count__c.SA_Citizen__c</members>
 		<name>CustomField</name>
 	</types>
 	<types>
@@ -42,8 +46,17 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
 		<members>Calendarific</members>
 		<name>ExternalCredential</name>
+	</types>
+	<types>
+		<members>SA_ID_Number_Entry</members>
+		<members>SA_ID_Number_UtilityBar</members>
+		<name>FlexiPage</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -56,6 +69,14 @@
 	<types>
 		<members>*</members>
 		<name>NamedCredential</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>Customer Community User</members>
+		<name>Profile</name>
 	</types>
 	<types>
 		<members>Calendarific</members>
